@@ -21,9 +21,7 @@ export function Login() {
   const userContext = useContext(AppContext);
 
   const { register, handleSubmit, formState: { errors } } = useForm();
-  
-  
-  
+
     const onSubmit = ({usuario, clave}) => {
       userContext.signin(usuario, clave);
     }

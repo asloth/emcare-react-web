@@ -22,7 +22,7 @@ export function SimplePacientCard( {name, id }) {
           </Td>
           <Td>
             <Button ml='3' fontSize='0.8em' colorScheme='purple'>
-              <NavLink to={`/pacient/${id}`}>Ver emociones</NavLink>
+              <NavLink to={`/pacient/${id.trim()}`}>Ver emociones</NavLink>
             </Button>
           </Td>
         </Tr>

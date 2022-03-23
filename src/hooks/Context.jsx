@@ -3,7 +3,7 @@ import {useLocation, Navigate} from "react-router-dom";
 
 export const AppContext = React.createContext();
 
-async function postData(url , data) {
+export async function postData(url , data) {
     // Opciones por defecto estan marcadas con un *
     
     var formBody = [];
@@ -36,7 +36,6 @@ export function Context({props,children}){
 
     
     useEffect(() => {
-      console.log('soyel useEffect')
       console.log(isLogged)
       
     }, [isLogged])
@@ -44,10 +43,8 @@ export function Context({props,children}){
     useEffect(()=>{
         if (localStorage.getItem('auth-token')){
             setIsLogged(true)
-            console.log(isLogged)
         }else{
             setIsLogged(false)
-            console.log(isLogged)
         }
     }, [])
     
@@ -58,11 +55,7 @@ export function Context({props,children}){
             console.log(data)
             
             if (!data.error){
-                console.log(isLogged)
-                console.log(true)
-                console.log(setIsLogged)
                 setIsLogged(true)
-                console.log(isLogged)
                 localStorage.setItem('auth-token', data);
 
             }

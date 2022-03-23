@@ -1,6 +1,6 @@
 import { Heading, Container, Text } from '@chakra-ui/react';
 
-export function CallToActionWithAnnotation() {
+export function CallToActionWithAnnotation({title}) {
   return (
     <>
       <Container maxW={'3xl'} padding={'5'}>
@@ -10,7 +10,7 @@ export function CallToActionWithAnnotation() {
           lineHeight={'110%'}
         >
           <Text as={'span'} color={'purple.400'}>
-            Pacientes
+            {title}
           </Text>
         </Heading>
       </Container>

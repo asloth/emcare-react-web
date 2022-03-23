@@ -67,7 +67,7 @@ function Home({key}){
   <>
     <ColorModeSwitcher justifySelf="flex-end" />
     <Box textAlign="center" fontSize="s">
-      <CallToActionWithAnnotation />
+      <CallToActionWithAnnotation title={'Pacientes'}/>
       <Center>
         <Stack direction='column' spacing={2} align='center'>
           <Table >
