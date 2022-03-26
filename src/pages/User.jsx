@@ -1,5 +1,5 @@
 import React, { useState, useEffect} from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { Box, Stack, Text, Table,
     Thead,
     Tbody,
@@ -15,16 +15,15 @@ import { CallToActionWithAnnotation } from '../components/Title';
 
 export function User(){
     let { id } = useParams();
-    const [emotions, setEmotions] = useState()
+    let {state} = useLocation();
+    const [emotions, setEmotions] = useState();
+
 
     let getEmotions = (userid) => {
         postData('https://emcare-expressjs-api.herokuapp.com/get-sentiment', {userid: userid})
         .then( data => {
-            console.log(data);
             if (data){
-                console.log('entre')
                 setEmotions(data[1])
-                console.log(data[1])
             }
         })
     }
@@ -37,7 +36,7 @@ export function User(){
         <>
             <ColorModeSwitcher justifySelf="flex-end" />
             <Box textAlign="center" fontSize="s">
-                <CallToActionWithAnnotation title={id}/>
+                <CallToActionWithAnnotation title={state?.username}/>
                 <Center>
                     <Stack direction='column' spacing={2} align='center'>
                         <Table>
@@ -50,10 +49,19 @@ export function User(){
                             </Thead>
                             <Tbody>
                                 {emotions?emotions.map((e)=>{
-                                    return <Tr>
-                                        <Td>{e.date._seconds}</Td>
-                                        <Td>{e.sentiment.document_tone.tones[0].tone_name}</Td>
-                                        <Td>{e.sentiment.document_tone.tones[0].score}</Td>
+                                    
+                                    let dat = new Date(e.date._seconds * 1000); 
+                                    let max = {"emotion": '', "score": 0.0};
+                                    for (let i in e.sentiment){
+                                        if (e.sentiment[i]> max.score){
+                                            max.emotion = i;
+                                            max.score = e.sentiment[i];
+                                        }
+                                    }
+                                    return <Tr key={e.date._seconds}>
+                                        <Td>{dat.toLocaleString()}</Td>
+                                        <Td>{max.emotion.toLocaleUpperCase()}</Td>
+                                        <Td>{max.score}</Td>
                                     </Tr>
                                 }):<Tr>
                                     <Td>Cargando...</Td>

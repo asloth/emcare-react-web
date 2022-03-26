@@ -22,7 +22,7 @@ export function SimplePacientCard( {name, id }) {
           </Td>
           <Td>
             <Button ml='3' fontSize='0.8em' colorScheme='purple'>
-              <NavLink to={`/pacient/${id.trim()}`}>Ver emociones</NavLink>
+              <NavLink to={{pathname: `/pacient/${id.trim()}`}} state={{username: name}}>Ver emociones</NavLink>
             </Button>
           </Td>
         </Tr>
