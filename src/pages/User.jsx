@@ -34,7 +34,6 @@ export function User(){
 
     return (
         <>
-            <ColorModeSwitcher justifySelf="flex-end" />
             <Box textAlign="center" fontSize="s">
                 <CallToActionWithAnnotation title={state?.username}/>
                 <Center>
@@ -61,7 +60,7 @@ export function User(){
                                     return <Tr key={e.date._seconds}>
                                         <Td>{dat.toLocaleString()}</Td>
                                         <Td>{max.emotion.toLocaleUpperCase()}</Td>
-                                        <Td>{max.score}</Td>
+                                        <Td>{`${max.score.toFixed(4)*100} %`}</Td>
                                     </Tr>
                                 }):<Tr>
                                     <Td>Cargando...</Td>

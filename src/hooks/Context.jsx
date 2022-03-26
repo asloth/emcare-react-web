@@ -62,9 +62,9 @@ export function Context({props,children}){
         });
     }
 
-    let signout = (callback) => {
+    let signout = () => {
+        localStorage.removeItem('auth-token');
         setIsLogged(false);
-        callback();
     };
 
     return <AppContext.Provider value={{isLogged, setIsLogged,signin, signout}}>

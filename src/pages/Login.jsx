@@ -30,7 +30,6 @@ export function Login() {
   return (
     
       <>
-      <ColorModeSwitcher justifySelf="flex-end" />
         <Box textAlign="center" fontSize="s">
           <Flex
             minH={'100vh'}

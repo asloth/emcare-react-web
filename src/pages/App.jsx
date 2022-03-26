@@ -1,5 +1,5 @@
 import React, {useContext, useState, useEffect} from 'react';
-import { ChakraProvider, Box,  theme, Stack, Text, Table,
+import { ChakraProvider, Box, Stack, Text, Table,
   Thead,
   Tbody,
   Tfoot,
@@ -8,7 +8,6 @@ import { ChakraProvider, Box,  theme, Stack, Text, Table,
   Tr,
   Th,
   Td, } from '@chakra-ui/react';
-import { ColorModeSwitcher } from '../components/ColorModeSwitcher';
 import { CallToActionWithAnnotation } from '../components/Title';
 import { SimplePacientCard } from '../components/SimpleCard';
 import { Login } from './Login';
@@ -20,7 +19,7 @@ import {AppContext} from '../hooks/Context'
 function App() {
   const auth = useContext(AppContext);    
   return (
-    <ChakraProvider theme={theme}>
+    < >
       {auth.isLogged?
         <Routes>
           <Route path="/" element= {
@@ -32,7 +31,7 @@ function App() {
       :<Login /> 
         }
       
-    </ChakraProvider>
+    </>
     
   );
 }
@@ -65,7 +64,6 @@ function Home({key}){
 
   return (
   <>
-    <ColorModeSwitcher justifySelf="flex-end" />
     <Box textAlign="center" fontSize="s">
       <CallToActionWithAnnotation title={'Pacientes'}/>
       <Center>
