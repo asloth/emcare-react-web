@@ -6,6 +6,8 @@ import { Box, Stack, Text, Table,
     Tfoot,
     Container,
     Center,
+    Flex,
+    useColorModeValue,
     Tr,
     Th,
     Td, } from "@chakra-ui/react";
@@ -34,7 +36,7 @@ export function User(){
 
     return (
         <>
-            <Box textAlign="center" fontSize="s">
+            <Flex grow={1} direction={'column'} bg={useColorModeValue('gray.50', 'gray.800')} textAlign="center" fontSize="s">
                 <CallToActionWithAnnotation title={state?.username}/>
                 <Center>
                     <Stack direction='column' spacing={2} align='center'>
@@ -69,7 +71,7 @@ export function User(){
                         </Table>
                     </Stack>
                 </Center>
-            </Box>
+            </Flex>
         </>
     )
 }

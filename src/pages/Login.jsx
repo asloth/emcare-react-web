@@ -3,10 +3,10 @@ import {
   Box,
   FormControl,
   FormLabel,
-  
+  Button,
   Stack,
   Link,
-  
+  Input,
   Heading,
   Text,
   useColorModeValue,
@@ -28,22 +28,18 @@ export function Login() {
    
 
   return (
-    
-      <>
-        <Box textAlign="center" fontSize="s">
           <Flex
-            minH={'100vh'}
             align={'center'}
+            grow={1}
             justify={'center'}
+            w={'100%'}
+            h={'100%'}
             bg={useColorModeValue('gray.50', 'gray.800')}
           >
-            <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
+            <Stack spacing={4} mx={'auto'} maxW={'lg'} py={12} px={6}>
               <form onSubmit={handleSubmit(onSubmit)}>
                 <Stack align={'center'}>
-                  <Heading fontSize={'4xl'}>Sign to your account</Heading>
-                  <Text fontSize={'lg'} color={'gray.600'}>
-                    to enjoy all of our cool <Link color={'blue.400'}>features</Link> ✌️
-                  </Text>
+                  <Heading color={'purple.500'} fontSize={'4xl'} padding={5}>Inicia sesión</Heading>
                 </Stack>
                 <Box
                   rounded={'lg'}
@@ -54,7 +50,7 @@ export function Login() {
                   <Stack spacing={4}>
                     <FormControl >
                       <FormLabel>Nombre de usuario</FormLabel>
-                      <input {...register("usuario",{
+                      <Input {...register("usuario",{
             required: {
               value: true,
               message: 'Ingrese un usuario',
@@ -68,7 +64,7 @@ export function Login() {
                     </FormControl>
                     <FormControl>
                       <FormLabel>Contraseña</FormLabel>
-                      <input {...register("clave", { required: true })} type="password" />
+                      <Input  {...register("clave", { required: true })} type="password" />
                     </FormControl>
                     <Stack spacing={10}>
                       <Stack
@@ -78,23 +74,21 @@ export function Login() {
                       >
                         
                       </Stack>
-                      <button type="submit"
-                        bg={'blue.400'}
+                      <Button type="submit"
+                        bg={'purple.500'}
                         color={'white'}
                         _hover={{
-                          bg: 'blue.500',
+                          bg: 'purple.300',
                         }}
                       >
                         Iniciar sesión
-                      </button>
+                      </Button>
                     </Stack>
                   </Stack>
                 </Box>
               </form>
             </Stack>
           </Flex>
-        </Box >
-      </>
   );
 
 }

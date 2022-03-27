@@ -2,24 +2,32 @@ import React, {useContext, useState, useEffect} from 'react';
 import { ChakraProvider, Box, Stack, Text, Table,
   Thead,
   Tbody,
-  Tfoot,
-  Container,
+  Spacer,
+  Flex,
   Center,
+  useColorModeValue,
   Tr,
   Th,
   Td, } from '@chakra-ui/react';
+  import { ColorModeSwitcher } from '../components/ColorModeSwitcher';
 import { CallToActionWithAnnotation } from '../components/Title';
 import { SimplePacientCard } from '../components/SimpleCard';
 import { Login } from './Login';
 import { User } from './User';
 import { Routes, Route } from "react-router-dom";
-import {AppContext} from '../hooks/Context'
+import {AppContext} from '../hooks/Context';
+import { LogOut } from '../components/LogOut';
 
 
 function App() {
   const auth = useContext(AppContext);    
   return (
-    < >
+    <Flex minH={'100vh'} w='100%' direction={'column'}>
+              <Box  w='100%' p={4} display='flex' bg={useColorModeValue('gray.50', 'gray.800')} >
+                <ColorModeSwitcher />
+                <Spacer />
+                <LogOut></LogOut>
+              </Box>
       {auth.isLogged?
         <Routes>
           <Route path="/" element= {
@@ -31,7 +39,7 @@ function App() {
       :<Login /> 
         }
       
-    </>
+    </Flex>
     
   );
 }
@@ -64,7 +72,7 @@ function Home({key}){
 
   return (
   <>
-    <Box textAlign="center" fontSize="s">
+    <Flex grow={1} direction={'column'} textAlign="center" fontSize="s" bg={useColorModeValue('gray.50', 'gray.800')} h={'100%'}>
       <CallToActionWithAnnotation title={'Pacientes'}/>
       <Center>
         <Stack direction='column' spacing={2} align='center'>
@@ -92,7 +100,7 @@ function Home({key}){
           </Table>
         </Stack >
       </Center>
-    </Box>
+    </Flex>
   </> );
   
 
