@@ -53,7 +53,7 @@ function Home({key}){
     const [users, setUsers] = useState(undefined)
 
     async function getAllUsers() {
-      await fetch('https://emcare-expressjs-api.herokuapp.com/users', {
+      await fetch('https://emcare-api.vercel.app/users', {
         method: 'POST',
       }).then(data => data.json()).then( response => {
         console.log(response)

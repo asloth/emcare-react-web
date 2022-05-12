@@ -22,7 +22,7 @@ export function User(){
 
 
     let getEmotions = (userid) => {
-        postData('https://emcare-expressjs-api.herokuapp.com/get-sentiment', {userid: userid})
+        postData('https://emcare-api.vercel.app/get-sentiment', {userid: userid})
         .then( data => {
             if (data){
                 setEmotions(data[1])
