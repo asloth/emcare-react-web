@@ -1,11 +1,13 @@
 import React, {useState, useContext, useEffect} from "react";
 import {useLocation, Navigate} from "react-router-dom";
+import Swal from "sweetalert2";
+import withReactContent from 'sweetalert2-react-content'
+
 
 export const AppContext = React.createContext();
 
 export async function postData(url , data) {
     // Opciones por defecto estan marcadas con un *
-    
     var formBody = [];
     for (var property in data) {
         var encodedKey = encodeURIComponent(property);
@@ -50,14 +52,16 @@ export function Context({props,children}){
     
 
     let signin = (usuario, clave) => {
+        const MySwal = withReactContent(Swal)
+
         postData('https://emcare-api.vercel.app/login', { username:usuario, password:clave })
         .then(data => {
-            console.log(data)
             
             if (!data.error){
                 setIsLogged(true)
                 localStorage.setItem('auth-token', data);
-
+            }else{
+                alert(data.error);
             }
         });
     }
