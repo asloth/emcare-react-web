@@ -1,5 +1,5 @@
 
-import {FormControl, FormLabel, Input, Stack, Button, Container, Box, Heading, useColorModeValue, Flex} from '@chakra-ui/react';
+import {FormControl, FormLabel, Input, Stack, Button, Container, Box, Heading, useColorModeValue, Checkbox, CheckboxGroup, Flex} from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 import { postData } from '../hooks/Context';
 import Swal from 'sweetalert2'
@@ -10,9 +10,9 @@ export function NewUser(){
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     
 
-    const onSubmit = async ({usuario, clave}) => {
-      
-        postData('https://emcare-api.vercel.app/register', { username:usuario, password:clave })
+    const onSubmit = async ({usuario, clave, isAdmin}) => {
+        console.log(isAdmin);
+        postData('https://emcare-api.vercel.app/register', { username:usuario, password:clave, admin:isAdmin })
         .then(data => {
             if (!data.error){
                 alert('Usuario registrado exitosamente');
@@ -51,12 +51,7 @@ export function NewUser(){
                                         </div>
                                     )}
                                 </FormControl>
-                                <Stack
-                                direction={{ base: 'column', sm: 'row' }}
-                                align={'start'}
-                                justify={'space-between'}
-                                >
-                                </Stack>
+                                
                                 <FormControl isRequired>
                                     <FormLabel htmlFor='password'>Contraseña</FormLabel>
                                     <Input  {...register("clave", { required: true, minLength: 6,message: 'Ingrese una contraseña' })} type="password" />
@@ -65,6 +60,10 @@ export function NewUser(){
                                         {errors.clave.message}
                                         </div>
                                     )}
+                                </FormControl>
+                                <FormControl >
+                                    <Checkbox defaultChecked colorScheme='green' {...register("isAdmin")} >Cuenta administradora</Checkbox>
+
                                 </FormControl>
                                 <Stack spacing={5}>
                                     <Stack

@@ -52,7 +52,6 @@ export function Context({props,children}){
     
 
     let signin = (usuario, clave) => {
-        const MySwal = withReactContent(Swal)
 
         postData('https://emcare-api.vercel.app/login', { username:usuario, password:clave })
         .then(data => {
