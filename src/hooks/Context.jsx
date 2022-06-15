@@ -35,6 +35,7 @@ export async function postData(url , data) {
 
 export function Context({props,children}){
     const [isLogged, setIsLogged] = useState();
+    const [isAdmin, setIsAdmin] = useState();
 
     
     useEffect(() => {
@@ -57,8 +58,10 @@ export function Context({props,children}){
         .then(data => {
             
             if (!data.error){
-                setIsLogged(true)
-                localStorage.setItem('auth-token', data);
+                setIsLogged(true);
+                setIsAdmin(data.admin);
+                localStorage.setItem('auth-token', data.token);
+                localStorage.setItem('name', data.username);
             }else{
                 alert(data.error);
             }
@@ -67,10 +70,11 @@ export function Context({props,children}){
 
     let signout = () => {
         localStorage.removeItem('auth-token');
+        localStorage.removeItem('name');
         setIsLogged(false);
     };
 
-    return <AppContext.Provider value={{isLogged, setIsLogged,signin, signout}}>
+    return <AppContext.Provider value={{isLogged, setIsLogged,signin, signout, isAdmin, setIsAdmin}}>
         {children}
     </AppContext.Provider>
 
@@ -80,8 +84,7 @@ export function RequireAuth({ children, props }) {
     const auth = useContext(AppContext);    
     
     let location = useLocation();
-    console.log('requireauth')
-    console.log(auth.isLogged)
+    
     //if (!auth.isLogged) {
          
         // Redirect them to the /login page, but save the current location they were

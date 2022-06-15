@@ -36,63 +36,66 @@ export function Login() {
             h={'100%'}
             bg={useColorModeValue('gray.50', 'gray.800')}
           >
-            <Stack spacing={4} mx={'auto'} maxW={'lg'} py={12} px={6}>
-              <form onSubmit={handleSubmit(onSubmit)}>
-                <Box
-                  rounded={'lg'}
-                  bg={useColorModeValue('white', 'gray.700')}
-                  boxShadow={'lg'}
-                  p={8}
-                  width={500}
-                >
-                  <Stack align={'left'}>
-                    <Heading color={'purple.500'} fontSize={'2xl'} paddingBottom={4}>Inicia sesión</Heading>
-                  </Stack>
-                  <Stack spacing={4}>
-                    <FormControl >
-                      <FormLabel>Nombre de usuario</FormLabel>
-                      <Input {...register("usuario",{
-                        required: {
-                          value: true,
-                          message: 'Ingrese un usuario',
-                        },
-                      })}/>
-                      {errors.usuario && (
-                        <div className='invalid-feedback'>
-                          {errors.usuario.message}
-                        </div>
-                      )}
-                    </FormControl>
-                    <FormControl>
-                      <FormLabel>Contraseña</FormLabel>
-                      <Input  {...register("clave", { required: true, message: 'Ingrese una contraseña' })} type="password" />
-                      {errors.clave && (
-                        <div className='invalid-feedback'>
-                          {errors.clave.message}
-                        </div>
-                      )}
-                    </FormControl>
-                    <Stack spacing={4}>
-                      <Stack
-                        direction={{ base: 'column', sm: 'row' }}
-                        align={'center'}
-                        justify={'space-between'}
-                      >
-                        
-                      </Stack>
-                      <Button type="submit"
-                        bg={'purple.500'}
-                        color={'white'}
-                        _hover={{
-                          bg: 'purple.300',
-                        }}
-                      >
-                        Iniciar sesión
-                      </Button>
+            <Stack>
+              <Heading textAlign={'center'} fontSize={'4xl'} >Administración de Emcare</Heading>
+              <Stack spacing={4} mx={'auto'} maxW={'lg'} py={12} px={6}>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                  <Box
+                    rounded={'lg'}
+                    bg={useColorModeValue('white', 'gray.700')}
+                    boxShadow={'lg'}
+                    p={8}
+                    width={500}
+                  >
+                    <Stack align={'left'}>
+                      <Heading color={'purple.500'} fontSize={'2xl'} paddingBottom={4}>Inicia sesión</Heading>
                     </Stack>
-                  </Stack>
-                </Box>
-              </form>
+                    <Stack spacing={4}>
+                      <FormControl >
+                        <FormLabel>Nombre de usuario</FormLabel>
+                        <Input {...register("usuario",{
+                          required: {
+                            value: true,
+                            message: 'Ingrese un usuario',
+                          },
+                        })}/>
+                        {errors.usuario && (
+                          <div className='invalid-feedback'>
+                            {errors.usuario.message}
+                          </div>
+                        )}
+                      </FormControl>
+                      <FormControl>
+                        <FormLabel>Contraseña</FormLabel>
+                        <Input  {...register("clave", { required: true, message: 'Ingrese una contraseña' })} type="password" />
+                        {errors.clave && (
+                          <div className='invalid-feedback'>
+                            {errors.clave.message}
+                          </div>
+                        )}
+                      </FormControl>
+                      <Stack spacing={4}>
+                        <Stack
+                          direction={{ base: 'column', sm: 'row' }}
+                          align={'center'}
+                          justify={'space-between'}
+                        >
+                          
+                        </Stack>
+                        <Button type="submit"
+                          bg={'purple.500'}
+                          color={'white'}
+                          _hover={{
+                            bg: 'purple.300',
+                          }}
+                        >
+                          Iniciar sesión
+                        </Button>
+                      </Stack>
+                    </Stack>
+                  </Box>
+                </form>
+              </Stack>
             </Stack>
           </Flex>
   );

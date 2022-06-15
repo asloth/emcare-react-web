@@ -2,8 +2,6 @@
 import {FormControl, FormLabel, Input, Stack, Button, Container, Box, Heading, useColorModeValue, Checkbox, CheckboxGroup, Flex} from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 import { postData } from '../hooks/Context';
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
 
 
 export function NewUser(){
@@ -11,7 +9,7 @@ export function NewUser(){
     
 
     const onSubmit = async ({usuario, clave, isAdmin}) => {
-        console.log(isAdmin);
+        
         postData('https://emcare-api.vercel.app/register', { username:usuario, password:clave, admin:isAdmin })
         .then(data => {
             if (!data.error){
