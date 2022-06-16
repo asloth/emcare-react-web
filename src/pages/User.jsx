@@ -24,13 +24,30 @@ export function User() {
   let { id } = useParams();
   let { state } = useLocation();
   const [emotions, setEmotions] = useState();
+  let spanishEmotions = {
+    joy: "Alegría",
+    sad: "Tristeza",
+    anger: "Enojo",
+    fear: "Miedo",
+    surprise: "Sorpresa",
+    love: "Amor",
+  };
+
+  function custom_sort(a, b) {
+    return (
+      new Date(b.date._seconds * 1000).getTime() -
+      new Date(a.date._seconds * 1000).getTime()
+    );
+  }
 
   let getEmotions = (userid) => {
     postData("https://emcare-api.vercel.app/get-sentiment", {
       userid: userid,
     }).then((data) => {
+      console.log(data);
       if (data) {
-        setEmotions(data[1]);
+        let sortedData = data[1].sort(custom_sort);
+        setEmotions(sortedData);
       }
     });
   };
@@ -73,8 +90,10 @@ export function User() {
                     return (
                       <Tr key={e.date._seconds}>
                         <Td>{dat.toLocaleString()}</Td>
-                        <Td>{max.emotion.toLocaleUpperCase()}</Td>
-                        <Td>{`${max.score.toFixed(4) * 100} %`}</Td>
+                        <Td>
+                          {spanishEmotions[max.emotion.toLocaleLowerCase()]}
+                        </Td>
+                        <Td>{`${(max.score * 100).toFixed(4)} %`}</Td>
                       </Tr>
                     );
                   })

@@ -89,7 +89,6 @@ function Home({ key }) {
     })
       .then((data) => data.json())
       .then((response) => {
-        console.log(response);
         setUsers(response);
         return response;
       })
