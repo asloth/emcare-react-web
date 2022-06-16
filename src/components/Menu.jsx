@@ -13,21 +13,28 @@ export function MenuOptions() {
         <Menu colorScheme="purple">
           <MenuButton as={Button}>Menu</MenuButton>
           <MenuList>
-            <MenuItem>
-              <Button variant="link">
-                <NavLink to={{ pathname: `/new-user/` }}>
-                  {" "}
-                  Crear usuario{" "}
-                </NavLink>
-              </Button>
-            </MenuItem>
-            <MenuItem>
-              <Button variant="link">
-                <NavLink to={{ pathname: `/users/` }}>
-                  Lista de usuarios{" "}
-                </NavLink>
-              </Button>
-            </MenuItem>
+            {auth.isAdmin ? (
+              <>
+                <MenuItem>
+                  <Button variant="link">
+                    <NavLink to={{ pathname: `/new-user/` }}>
+                      {" "}
+                      Crear usuario{" "}
+                    </NavLink>
+                  </Button>
+                </MenuItem>
+                <MenuItem>
+                  <Button variant="link">
+                    <NavLink to={{ pathname: `/users/` }}>
+                      Lista de usuarios{" "}
+                    </NavLink>
+                  </Button>
+                </MenuItem>
+              </>
+            ) : (
+              <></>
+            )}
+
             <MenuItem>
               <Button variant="link">
                 <NavLink to={{ pathname: `/new-password/` }}>
