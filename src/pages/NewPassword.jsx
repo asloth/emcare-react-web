@@ -50,7 +50,7 @@ export function NewPassword() {
           ToastExample(
             "Exito.",
             "Contraseña actualizada correctamente",
-            "error"
+            "success"
           );
           reset();
         } else {
