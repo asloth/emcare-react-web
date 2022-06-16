@@ -43,11 +43,17 @@ function App() {
       >
         <ColorModeSwitcher />
         <MenuOptions></MenuOptions>
-        <Spacer />
-        <Button marginInline={4} variant="link" rightIcon={<FaHome />}>
-          <NavLink to={{ pathname: `/` }}>Inicio</NavLink>
-        </Button>
-        <Spacer />
+        {auth.isLogged ? (
+          <>
+            <Spacer />
+            <Button marginInline={4} variant="link" rightIcon={<FaHome />}>
+              <NavLink to={{ pathname: `/` }}>Inicio</NavLink>
+            </Button>
+            <Spacer />
+          </>
+        ) : (
+          <Spacer />
+        )}
         <LogOut></LogOut>
       </Box>
       {auth.isLogged ? (
