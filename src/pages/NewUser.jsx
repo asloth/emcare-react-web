@@ -9,7 +9,7 @@ import {
   Heading,
   useColorModeValue,
   Checkbox,
-  CheckboxGroup,
+  useToast,
   Flex,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
@@ -22,6 +22,17 @@ export function NewUser() {
     reset,
     formState: { errors },
   } = useForm();
+  const toast = useToast();
+
+  function ToastExample(title, des, type) {
+    return toast({
+      title: title,
+      description: des,
+      status: type,
+      duration: 5000,
+      isClosable: true,
+    });
+  }
 
   const onSubmit = async ({ usuario, clave, isAdmin }) => {
     postData("https://emcare-api.vercel.app/register", {
@@ -30,10 +41,10 @@ export function NewUser() {
       admin: isAdmin,
     }).then((data) => {
       if (!data.error) {
-        alert("Usuario registrado exitosamente");
+        ToastExample("Exito.", "Usuario registrado exitosamente", "success");
         reset();
       } else {
-        alert(data.error);
+        ToastExample("Error", data.error, "error");
       }
     });
   };

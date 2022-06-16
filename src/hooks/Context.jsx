@@ -1,7 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
 import { useLocation, Navigate } from "react-router-dom";
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
 
 export const AppContext = React.createContext();
 
@@ -46,20 +44,21 @@ export function Context({ props, children }) {
     }
   }, []);
 
-  let signin = (usuario, clave) => {
-    postData("https://emcare-api.vercel.app/login", {
+  let signin = async (usuario, clave) => {
+    const data = await postData("https://emcare-api.vercel.app/login", {
       username: usuario,
       password: clave,
-    }).then((data) => {
-      if (!data.error) {
-        setIsLogged(true);
-        setIsAdmin(data.admin);
-        localStorage.setItem("auth-token", data.token);
-        localStorage.setItem("name", data.username);
-      } else {
-        alert(data.error);
-      }
     });
+
+    if (!data.error) {
+      setIsLogged(true);
+      setIsAdmin(data.admin);
+      localStorage.setItem("auth-token", data.token);
+      localStorage.setItem("name", data.username);
+      return "OK";
+    } else {
+      return data.error;
+    }
   };
 
   let signout = () => {

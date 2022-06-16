@@ -12,22 +12,18 @@ import {
   Heading,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { CallToActionWithAnnotation } from "../components/Title";
-import { postData } from "../hooks/Context";
 import { AdminRow } from "../components/AdminRow";
 
 export function Admins() {
   const [admins, setAdmins] = useState(undefined);
 
-  async function getAdmins() {
-    await fetch("https://emcare-api.vercel.app/admins", {
+  function getAdmins() {
+    fetch("https://emcare-api.vercel.app/admins", {
       method: "POST",
     })
       .then((data) => data.json())
       .then((response) => {
-        console.log(response);
         setAdmins(response);
-        return response;
       })
       .catch((error) => {
         console.log(error);
@@ -71,6 +67,7 @@ export function Admins() {
                         username={e.name}
                         admin={e.admin}
                         state={e.state}
+                        updateList={getAdmins}
                       ></AdminRow>
                     );
                   })

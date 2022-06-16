@@ -8,6 +8,7 @@ import {
   Heading,
   Flex,
   useColorModeValue,
+  useToast,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { postData } from "../hooks/Context";
@@ -19,23 +20,44 @@ export function NewPassword() {
     reset,
     formState: { errors },
   } = useForm();
+  const toast = useToast();
 
   const onSubmit = async ({ clave1, clave2 }) => {
     if (clave1 != clave2) {
-      alert("Las contraseñas ingresadas no son iguales");
+      ToastExample(
+        "Error",
+        "Las contraseñas ingresadas no son iguales",
+        "error"
+      );
     }
     const user = localStorage.getItem("name");
-    postData("https://emcare-api.vercel.app/update-password", {
-      username: user,
-      password: clave1,
-    }).then((data) => {
-      if (!data.error) {
-        alert("Contraseña actualizada correctamente");
-        reset();
-      } else {
-        alert(data.error);
-      }
-    });
+
+    function ToastExample(title, des, type) {
+      return toast({
+        title: title,
+        description: des,
+        status: type,
+        duration: 8000,
+        isClosable: true,
+      });
+    }
+    if (clave1 == clave2) {
+      postData("https://emcare-api.vercel.app/update-password", {
+        username: user,
+        password: clave1,
+      }).then((data) => {
+        if (!data.error) {
+          ToastExample(
+            "Exito.",
+            "Contraseña actualizada correctamente",
+            "error"
+          );
+          reset();
+        } else {
+          ToastExample("Error.", data.error, "error");
+        }
+      });
+    }
   };
   return (
     <>

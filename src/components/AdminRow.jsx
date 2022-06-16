@@ -1,30 +1,44 @@
-import { Text, Button, Tr, Td } from "@chakra-ui/react";
+import { Text, Button, Tr, Td, useToast } from "@chakra-ui/react";
 import { FaBan, FaCheck, FaTrash } from "react-icons/fa";
 import React, { useState } from "react";
 import { postData } from "../hooks/Context";
 
-export function AdminRow({ username, admin, state }) {
-  async function deleteUser(username) {
+export function AdminRow({ username, admin, state, updateList }) {
+  const toast = useToast();
+
+  function deleteUser(username) {
     postData("https://emcare-api.vercel.app/delete-admin", {
       username: username,
     }).then((data) => {
       if (!data.error) {
-        alert("Usuario eliminado correctamente");
+        ToastExample("Exito.", "Usuario eliminado correctamente", "success");
+        updateList();
       } else {
-        alert(data.error);
+        ToastExample("Error.", data.error, "error");
       }
     });
   }
 
-  async function updateUserState(username, newState) {
+  function ToastExample(title, des, type) {
+    return toast({
+      title: title,
+      description: des,
+      status: type,
+      duration: 5000,
+      isClosable: true,
+    });
+  }
+
+  function updateUserState(username, newState) {
     postData("https://emcare-api.vercel.app/update-state", {
       username: username,
       newstate: newState,
     }).then((data) => {
       if (!data.error) {
-        alert("Estado actualizado correctamente");
+        ToastExample("Exito.", "Estado actualizado correctamente", "success");
+        updateList();
       } else {
-        alert(data.error);
+        ToastExample("Error.", data.error, "error");
       }
     });
   }
@@ -70,6 +84,7 @@ export function AdminRow({ username, admin, state }) {
           <Button
             type="button"
             rightIcon={<FaCheck />}
+            w={"100"}
             colorScheme="green"
             variant="outline"
             onClick={() => {

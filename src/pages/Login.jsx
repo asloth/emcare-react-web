@@ -7,6 +7,7 @@ import {
   Stack,
   Input,
   Heading,
+  useToast,
   useColorModeValue,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
@@ -15,15 +16,29 @@ import { AppContext } from "../hooks/Context";
 
 export function Login() {
   const userContext = useContext(AppContext);
-
+  const toast = useToast();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = ({ usuario, clave }) => {
-    userContext.signin(usuario, clave);
+  function ToastExample(title, des, type) {
+    return toast({
+      title: title,
+      description: des,
+      status: type,
+      duration: 8000,
+      isClosable: true,
+    });
+  }
+
+  const onSubmit = async ({ usuario, clave }) => {
+    let message = await userContext.signin(usuario, clave);
+
+    if (message != "OK") {
+      ToastExample("Error.", message, "error");
+    }
   };
 
   return (
