@@ -27,7 +27,7 @@ function App() {
   const auth = useContext(AppContext);    
   return (
     <Flex minH={'100vh'} w='100%' direction={'column'}>
-              <Box  w='100%' p={4} display='flex' >
+              <Box  w='100%' p={4} display='flex' bg={useColorModeValue('gray.50', 'gray.800')} >
                 <ColorModeSwitcher />
                 <MenuOptions></MenuOptions>
                 <Spacer />
@@ -67,8 +67,7 @@ function Home({key}){
         console.log(response)
         setUsers(response);
         return response;
-      }
-      ).catch(error =>{
+      }).catch(error =>{
         console.log(error);
       })
     }
@@ -80,7 +79,7 @@ function Home({key}){
 
   return (
   <>
-    <Flex grow={1} direction={'column'} textAlign="center" fontSize="s" bg={useColorModeValue('gray.50', 'gray.800')} h={'100%'}>
+    <Flex grow={1} direction={'column'} textAlign="center" fontSize="s" bg={useColorModeValue('gray.50', 'gray.800')}  h={'100%'}>
       <CallToActionWithAnnotation title={'Estudiantes'}/>
       <Center>
         <Stack direction='column' spacing={2} align='center'>
