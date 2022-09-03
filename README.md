@@ -9,6 +9,7 @@ This page is being hosted in https://emcare-web.vercel.app/
 - CRUD users and admins
 - Permissions
 - Disable / enable users
+- Dark Theme / Light Theme
 
 ## Tecnologies
 - Reactjs
