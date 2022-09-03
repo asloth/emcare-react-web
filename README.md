@@ -18,8 +18,8 @@ This page is being hosted in https://emcare-web.vercel.app/
 
 ## Interfaces
 
-<img src="/interfaces/login.png"  width="900" height="600">
-<img src="/interfaces/crud.png" width="900" height="600">
-<img src="/interfaces/create-user.png" width="900" height="600">
-<img src="/interfaces/list-users.png" width="900" height="600">
+<img src="/interfaces/login.png"  width="900" height="400">
+<img src="/interfaces/crud.png" width="900" height="400">
+<img src="/interfaces/create-user.png" width="900" height="400">
+<img src="/interfaces/list-users.png" width="900" height="400">
 
